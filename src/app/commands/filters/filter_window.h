@@ -11,6 +11,7 @@
 
 #include "app/commands/filters/filter_preview.h"
 #include "app/commands/filters/filter_target_buttons.h"
+#include "app/ui/editor/editor.h"
 #include "filters/tiled_mode.h"
 #include "ui/box.h"
 #include "ui/button.h"
@@ -49,6 +50,9 @@ namespace app {
     // which specified different targets for each matrix.
     void setNewTarget(Target target);
 
+    void onBroadcastMouseMessage(const gfx::Point& screenPos,
+                                 ui::WidgetsList& targets) override;
+
     // Returns the container where derived classes should put controls.
     ui::Widget* getContainer() { return &m_container; }
 
@@ -78,6 +82,8 @@ namespace app {
     FilterTargetButtons m_targetButton;
     ui::CheckBox m_showPreview;
     ui::CheckBox* m_tiledCheck;
+    Editor* m_editor;
+    tools::Tool* m_oldTool;
   };
 
 } // namespace app
